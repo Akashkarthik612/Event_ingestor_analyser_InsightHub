@@ -1,0 +1,55 @@
+'''so we will use this aggregate table as the source of truth for our analytics platform and
+which will aggregate data from multiple sources and provide insights to our users.
+since the other tables are immutable aggregate table will be updated in real time as new data comes in and we can use it to generate reports and dashboards for our users.
+'''
+
+
+'''first lets create a table for hourly user behviour
+so instead of queriying every row for each single analytics puerpose which will cost query latency and cost
+we will create an aggregate table which will store pre-aggregated data on hourly basis
+
+'''
+
+
+import uuid
+from sqlalchemy import (
+    Column,
+    Integer,
+    DateTime,
+    Index,
+    func
+)
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
+
+class HourlyProductBehaviorAggregate(Base):
+    """
+    Stores hourly aggregates derived from user_behavior_events.
+    This table is optimized for fast reads (dashboards, analytics, ML).
+    """
+    __tablename__ = "hourly_product_behavior_agg"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+
+    product_id = Column(Integer, nullable=False)
+
+    # Start of the hour bucket (e.g. 2025-01-25 14:00:00)
+    event_hour = Column(DateTime(timezone=True), nullable=False)
+
+    view_count = Column(Integer, nullable=False, default=0)
+    search_count = Column(Integer, nullable=False, default=0)
+
+    total_events = Column(Integer, nullable=False, default=0)
+
+    last_updated_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=False
+    )
+
+    __table_args__ = (
+        Index("idx_hourly_product_time", "product_id", "event_hour", unique=True),
+    )
