@@ -24,7 +24,7 @@ class CartEvent(Base):
     correlation_id = Column(String, nullable=False, comment="Maps to session_id")
     user_id = Column(Integer, nullable=True)
     product_id = Column(Integer, nullable=False)
-    action = Column(Enum(CartEventType), nullable=False)
+    action = Column(String, nullable=False)   # whether the user added or removed the product from the cart
     quantity = Column(Integer, nullable=False)
     event_time = Column(DateTime(timezone=True), nullable=False)
     
