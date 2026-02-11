@@ -33,9 +33,36 @@ async def get_user_behavior_events(db: Session = Depends(get_db)):
     return events_fetch
     
 @app.get("/payments_events")
+
 async def get_payments_events(db:Session = Depends(get_db)):
     events_fetch = db.query(PaymentEvent).all()
     
     return events_fetch
     
 @app.get("/cart_events")
+async def cart_payments(db: Session = Depends(get_db)):
+    events_fetch = db.query(CartEvent).all()
+    
+    
+    return events_fetch
+    
+@app.get("/order_events")
+async def order_events(db: Session = Depends(get_db)):
+    events_fetch = db.query(OrderEvent).all()
+    
+    
+    return events_fetch   
+    
+@app.get("/logistics_events")
+async def logistics_events(db: Session = Depends(get_db)):
+    events_fetch = db.query(LogisticsEvent).all()
+    
+    
+    return events_fetch 
+    
+@app.get("/order_item_events")
+async def logistics_events(db: Session = Depends(get_db)):
+    events_fetch = db.query(OrderItemEvent).all()
+    
+    
+    return events_fetch 
