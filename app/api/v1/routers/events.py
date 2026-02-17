@@ -7,7 +7,7 @@ so we will have endpoints for user_behavior_events, cart_events, purchase_events
 
 '''
 from fastapi import FastAPI
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 
@@ -21,48 +21,83 @@ from app.db.models.order_events import OrderEvent
 from app.db.models.aggregates import HourlyProductBehaviorAggregate
 
 
-app = FastAPI()    ## the fast API is loaded in this app variable
 
 ### first end point for our first table
-@app.get("/user_behavior_events")
-async def get_user_behavior_events(db: Session = Depends(get_db)):
-    ''' the main use of this endpoint is get the user behavior events from the DB and return it to the client.''''
-    events_fetch = db.query(UserBehaviorEvent).all() ### this will fetch all the datas from the table as of now we will update and modify later
-    
-    
-    return events_fetch
-    
-@app.get("/payments_events")
+router = APIRouter(prefix="/events", tags=["Events"])
 
-async def get_payments_events(db:Session = Depends(get_db)):
-    events_fetch = db.query(PaymentEvent).all()
-    
-    return events_fetch
-    
-@app.get("/cart_events")
-async def cart_payments(db: Session = Depends(get_db)):
-    events_fetch = db.query(CartEvent).all()
-    
-    
-    return events_fetch
-    
-@app.get("/order_events")
-async def order_events(db: Session = Depends(get_db)):
-    events_fetch = db.query(OrderEvent).all()
-    
-    
-    return events_fetch   
-    
-@app.get("/logistics_events")
-async def logistics_events(db: Session = Depends(get_db)):
-    events_fetch = db.query(LogisticsEvent).all()
-    
-    
-    return events_fetch 
-    
-@app.get("/order_item_events")
-async def logistics_events(db: Session = Depends(get_db)):
-    events_fetch = db.query(OrderItemEvent).all()
-    
-    
-    return events_fetch 
+# 1️ User Behavior
+@router.post("/user-behavior", status_code=status.HTTP_201_CREATED)
+def create_user_behavior_event(
+    payload: UserBehaviorEvent,
+    db: Session = Depends(get_db),
+):
+    db.add(payload)
+    db.commit()
+    db.refresh(payload)
+    return payload
+
+
+# 2️ Cart
+@router.post("/cart", status_code=status.HTTP_201_CREATED)
+def create_cart_event(
+    payload: CartEvent,
+    db: Session = Depends(get_db),
+):
+    db.add(payload)
+    db.commit()
+    db.refresh(payload)
+    return payload
+
+
+# 3️ Order
+@router.post("/order", status_code=status.HTTP_201_CREATED)
+def create_order_event(
+    payload: OrderEvent,
+    db: Session = Depends(get_db),
+):
+    db.add(payload)
+    db.commit()
+    db.refresh(payload)
+    return payload
+
+
+# 4️ Order Item
+@router.post("/order-item", status_code=status.HTTP_201_CREATED)
+def create_order_item_event(
+    payload: OrderItemEvent,
+    db: Session = Depends(get_db),
+):
+    db.add(payload)
+    db.commit()
+    db.refresh(payload)
+    return payload
+
+
+# 5️ Payment
+@router.post("/payment", status_code=status.HTTP_201_CREATED)
+def create_payment_event(
+    payload: PaymentEvent,
+    db: Session = Depends(get_db),
+):
+    db.add(payload)
+    db.commit()
+    db.refresh(payload)
+    return payload
+
+
+# 6️ Logistics
+@router.post("/logistics", status_code=status.HTTP_201_CREATED)
+def create_logistics_event(
+    payload: LogisticsEvent,
+    db: Session = Depends(get_db),
+):
+    db.add(payload)
+    db.commit()
+    db.refresh(payload)
+    return payload
+
+
+# 7️ GET User Behavior
+@router.get("/user-behavior")
+def get_user_behavior_events(db: Session = Depends(get_db)):
+    return db.query(UserBehaviorEvent).limit(100).all()
