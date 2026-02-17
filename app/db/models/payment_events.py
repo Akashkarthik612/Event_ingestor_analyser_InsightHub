@@ -3,16 +3,12 @@ from sqlalchemy import (
     String,
     Integer,
     DateTime,
-    Enum,
     Index,
     func,
 )
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base
+from app.db.base import Base
 import uuid
-import enum
-
-Base = declarative_base()
 
 
 

@@ -8,11 +8,9 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base
+from app.db.base import Base
 import uuid
 import enum
-
-Base = declarative_base()
 
 class UserBehaviorEventType(enum.Enum):
     PRODUCT_VIEWED = "product_viewed"

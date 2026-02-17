@@ -8,12 +8,17 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base
+from app.db.base import Base
 import uuid
 import enum
 
-Base = declarative_base()
 
+class LogisticsStatus(enum.Enum):
+    PICKED_UP = "picked_up"
+    IN_TRANSIT = "in_transit"
+    OUT_FOR_DELIVERY = "out_for_delivery"
+    DELIVERED = "delivered"
+    DELAYED = "delayed"
 
 
 class LogisticsEvent(Base):
@@ -22,5 +27,5 @@ class LogisticsEvent(Base):
 
     event_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     order_id = Column(String, nullable=False, index=True)
-    status = Column(Enum, nullable=False)
+    status = Column(Enum(LogisticsStatus), nullable=False)
     event_time = Column(DateTime(timezone=True), nullable=False)

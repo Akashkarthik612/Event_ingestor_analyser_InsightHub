@@ -3,19 +3,12 @@ from sqlalchemy import (
     String,
     Integer,
     DateTime,
-    Enum,
     Index,
     func,
 )
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base
+from app.db.base import Base
 import uuid
-import enum
-
-
-
-
-Base = declarative_base()
 
 class CartEvent(Base):
     __tablename__ = "cart_events"
