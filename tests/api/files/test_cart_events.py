@@ -4,7 +4,7 @@ Covers: add/remove actions, nullable user_id (guest), missing required fields.
 """
 import pytest
 
-BASE_URL = "/events/cart"
+BASE_URL = "/api/v1/events/cart"
 
 
 def make_payload(**overrides):

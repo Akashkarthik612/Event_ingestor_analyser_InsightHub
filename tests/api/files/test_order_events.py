@@ -4,7 +4,7 @@ Covers: all OrderStatus enum values, nullable user_id, missing fields.
 """
 import pytest
 
-BASE_URL = "/events/order"
+BASE_URL = "/api/v1/events/order"
 
 
 def make_payload(**overrides):

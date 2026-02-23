@@ -4,7 +4,7 @@ Covers: price in cents, nullable description, missing required fields.
 """
 import pytest
 
-BASE_URL = "/events/order-item"
+BASE_URL = "/api/v1/events/order-item"
 
 
 def make_payload(**overrides):

@@ -4,7 +4,7 @@ Covers: Success / Refunded statuses, amount in cents, missing fields.
 """
 import pytest
 
-BASE_URL = "/events/payment"
+BASE_URL = "/api/v1/events/payment"
 
 
 def make_payload(**overrides):

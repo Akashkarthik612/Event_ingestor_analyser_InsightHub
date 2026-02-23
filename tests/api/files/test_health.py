@@ -2,6 +2,7 @@
 Tests for GET /health (or root) — basic smoke test confirming the app boots.
 Adjust the URL to match your actual health-check endpoint.
 """
+from flask import app
 import pytest
 
 
@@ -20,3 +21,9 @@ class TestHealthCheck:
         """FastAPI auto-generates /docs — confirms app is fully initialised."""
         res = client.get("/docs")
         assert res.status_code == 200
+    # Add this test temporarily to test_health.py
+    def test_print_all_routes(self, client):
+        from app.main import app
+        for route in app.routes:
+            print(route.path)
+        assert True   # just to see the output

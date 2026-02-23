@@ -4,7 +4,7 @@ Covers: all 5 LogisticsStatus enum values, missing fields, bad enum.
 """
 import pytest
 
-BASE_URL = "/events/logistics"
+BASE_URL = "/api/v1/events/logistics"
 
 
 def make_payload(**overrides):

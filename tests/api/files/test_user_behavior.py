@@ -6,7 +6,7 @@ import pytest
 from datetime import datetime, timezone
 
 
-BASE_URL = "/events/user-behavior"
+BASE_URL = "/api/v1/events/user-behavior"
 
 
 # --------------------------------------------------------------------------- #
