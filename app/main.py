@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 from app.api.v1.api_router import api_router
 from app.db.base import Base
 from app.db.session import engine
@@ -7,11 +8,23 @@ from app.db.session import engine
 import app.db.models  # noqa: F401
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup/shutdown events."""
+    # Startup
+    Base.metadata.create_all(bind=engine)
+    print("🚀 InsightHub API Started")
+    yield
+    # Shutdown
+    pass
+
+
 def create_application() -> FastAPI:
     app = FastAPI(
         title="InsightHub",
         description="Real-time Event Ingestion & Analytics Platform",
         version="1.0.0",
+        lifespan=lifespan,
     )
 
     # CORS (important later for frontend)
@@ -30,13 +43,6 @@ def create_application() -> FastAPI:
 
 
 app = create_application()
-
-
-# Optional: create tables on startup (only for development)
-@app.on_event("startup")
-def on_startup():
-    Base.metadata.create_all(bind=engine)
-    print("🚀 InsightHub API Started")
 
 
 @app.get("/")

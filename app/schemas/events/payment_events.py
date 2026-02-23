@@ -11,7 +11,7 @@ class PaymentStatus(str, Enum):
 
 class PaymentCreate(BaseModel):
     # We use order_id as a string to match your DB Column
-    order_id: str = Field(..., example="ORD-992834") 
+    order_id: str = Field(..., json_schema_extra={"example": "ORD-992834"})
     # to avoid floating-point errors.
     amount: int = Field(..., gt=0, description="Amount in smallest currency unit (e.g., cents)")
     

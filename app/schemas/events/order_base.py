@@ -12,7 +12,7 @@ class OrderStatus(str, Enum):
 
 
 class OrderCreate(BaseModel):
-    order_id: str = Field(..., example="ORD-123456")
+    order_id: str = Field(..., json_schema_extra={"example": "ORD-123456"})
     user_id: Optional[int] = None
     status: OrderStatus
     country: Optional[str] = None

@@ -2,7 +2,7 @@
 Tests for GET /health (or root) — basic smoke test confirming the app boots.
 Adjust the URL to match your actual health-check endpoint.
 """
-from flask import app
+from app.main import app
 import pytest
 
 
@@ -23,6 +23,7 @@ class TestHealthCheck:
         assert res.status_code == 200
     # Add this test temporarily to test_health.py
     def test_print_all_routes(self, client):
+        """Print all registered routes in the app."""
         from app.main import app
         for route in app.routes:
             print(route.path)
