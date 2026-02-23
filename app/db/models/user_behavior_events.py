@@ -33,6 +33,8 @@ class UserBehaviorEvent(Base):
     session_id = Column(String, nullable=False)
     country = Column(String, nullable=True)
     source = Column(String, nullable=True)
+    platform = Column(String, nullable=True)
+
     
     __table_args__ = (
         Index("idx_user_behavior_user_time", "user_id", "event_time"),
