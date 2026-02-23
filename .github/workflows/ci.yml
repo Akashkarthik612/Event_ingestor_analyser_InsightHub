@@ -33,6 +33,10 @@ jobs:
           echo "DATABASE_URL=sqlite:///./test.db" >> $GITHUB_ENV
           echo "ENVIRONMENT=test" >> $GITHUB_ENV
 
+      - name: Export PYTHONPATH
+        run: |
+          echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
       - name: Run tests
         run: |
           pytest tests/ --tb=short --cov=app --cov-report=term-missing --cov-report=xml:coverage.xml -v
