@@ -42,3 +42,9 @@ def on_startup():
 @app.get("/")
 def root():
     return {"message": "InsightHub API is running"}
+
+
+@app.get("/health")
+def health():
+    """Basic health-check endpoint used by CI/tests."""
+    return {"status": "ok"}
