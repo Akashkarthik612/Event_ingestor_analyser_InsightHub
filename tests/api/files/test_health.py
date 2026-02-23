@@ -2,7 +2,6 @@
 Tests for GET /health (or root) — basic smoke test confirming the app boots.
 Adjust the URL to match your actual health-check endpoint.
 """
-from app.main import app
 import pytest
 
 

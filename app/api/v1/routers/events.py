@@ -10,8 +10,8 @@ from sqlalchemy.orm import Session
 # Import Pydantic schemas
 from app.schemas.events.user_events import UserBehaviorCreate
 from app.schemas.events.cart_events import CartCreate
-from app.schemas.events.order_base import OrderCreate
-from app.schemas.events.order_events import OrderItemCreate
+from app.schemas.events.order_events import OrderCreate
+from app.schemas.events.order_base import OrderItemCreate
 from app.schemas.events.payment_events import PaymentCreate
 from app.schemas.events.logistic_events import LogisticsCreate
 
