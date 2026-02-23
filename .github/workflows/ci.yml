@@ -1,9 +1,4 @@
 
-'''V1 Test file for API endpoint tests. 
-This workflow runs on every push and pull request to any branch. 
-It sets up a Python environment, installs dependencies, and runs the test suite using pytest. 
-It also collects code coverage data and uploads it to Codecov.'''
-
 name: CI - API Endpoint Tests
 
 on:
