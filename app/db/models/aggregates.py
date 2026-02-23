@@ -1,15 +1,3 @@
-'''so we will use this aggregate table as the source of truth for our analytics platform and
-which will aggregate data from multiple sources and provide insights to our users.
-since the other tables are immutable aggregate table will be updated in real time as new data comes in and we can use it to generate reports and dashboards for our users.
-'''
-
-
-'''first lets create a table for hourly user behviour
-so instead of queriying every row for each single analytics puerpose which will cost query latency and cost
-we will create an aggregate table which will store pre-aggregated data on hourly basis
-
-'''
-
 
 import uuid
 from sqlalchemy import (

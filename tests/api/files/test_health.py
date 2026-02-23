@@ -23,7 +23,6 @@ class TestHealthCheck:
         assert res.status_code == 200
     # Add this test temporarily to test_health.py
     def test_print_all_routes(self, client):
-        """Print all registered routes in the app."""
         from app.main import app
         for route in app.routes:
             print(route.path)
