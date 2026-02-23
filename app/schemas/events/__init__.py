@@ -1,8 +1,8 @@
 """Event schemas for API request/response validation."""
 from app.schemas.events.user_events import UserBehaviorCreate, UserBehaviorEventType
 from app.schemas.events.cart_events import CartCreate
-from app.schemas.events.order_base import OrderCreate, OrderStatus
-from app.schemas.events.order_events import OrderItemCreate
+from app.schemas.events.order_events import OrderCreate, OrderStatus
+from app.schemas.events.order_base import OrderItemCreate
 from app.schemas.events.payment_events import PaymentCreate, PaymentStatus
 from app.schemas.events.logistic_events import LogisticsCreate, LogisticsStatus
 
