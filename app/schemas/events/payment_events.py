@@ -1,13 +1,6 @@
 from pydantic import BaseModel, ConfigDict, Field
 from datetime import datetime
-from typing import Optional
-from enum import Enum
 
-class PaymentStatus(str, Enum):
-    PENDING = "pending"
-    SUCCESS = "success"
-    FAILED = "failed"
-    REFUNDED = "refunded"
 
 class PaymentCreate(BaseModel):
     # We use order_id as a string to match your DB Column
@@ -15,7 +8,7 @@ class PaymentCreate(BaseModel):
     # to avoid floating-point errors.
     amount: int = Field(..., gt=0, description="Amount in smallest currency unit (e.g., cents)")
     
-    status: PaymentStatus
+    status: str
     event_time: datetime
     currency: str = Field("USD", max_length=3)
 

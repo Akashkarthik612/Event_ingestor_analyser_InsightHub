@@ -27,5 +27,12 @@ class LogisticsEvent(Base):
 
     event_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     order_id = Column(String, nullable=False, index=True)
-    status = Column(Enum(LogisticsStatus), nullable=False)
+    status = Column(
+        Enum(
+            LogisticsStatus,
+            values_callable=lambda enum_cls: [item.value for item in enum_cls],
+            validate_strings=True,
+        ),
+        nullable=False,
+    )
     event_time = Column(DateTime(timezone=True), nullable=False)

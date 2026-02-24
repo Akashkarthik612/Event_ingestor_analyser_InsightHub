@@ -3,7 +3,7 @@ from app.schemas.events.user_events import UserBehaviorCreate, UserBehaviorEvent
 from app.schemas.events.cart_events import CartCreate
 from app.schemas.events.order_base import OrderItemCreate, OrderItemResponse
 from app.schemas.events.order_events import OrderCreate, OrderStatus, OrderResponse
-from app.schemas.events.payment_events import PaymentCreate, PaymentStatus
+from app.schemas.events.payment_events import PaymentCreate
 from app.schemas.events.logistic_events import LogisticsCreate, LogisticsStatus
 
 __all__ = [
@@ -15,8 +15,7 @@ __all__ = [
     "OrderResponse",
     "OrderItemCreate",
     "OrderItemResponse",
-    "PaymentCreate",
-    "PaymentStatus",
-    "LogisticsCreate",
+    "PaymentCreate",`r`n    "LogisticsCreate",
     "LogisticsStatus",
 ]
+

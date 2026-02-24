@@ -17,7 +17,7 @@ class UserBehaviorCreate(BaseModel):
     session_id: str
     country: Optional[str] = None
     source: Optional[str] = None
-    platform: str 
+    platform: Optional[str] = None
 
     # This allows Pydantic to work with SQLAlchemy objects if needed later
     model_config = ConfigDict(from_attributes=True)

@@ -23,7 +23,14 @@ class UserBehaviorEvent(Base):
     ###primary key###
     event_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, nullable = False) # this is unique for all the tables
     
-    event_type = Column(Enum(UserBehaviorEventType), nullable=False)
+    event_type = Column(
+        Enum(
+            UserBehaviorEventType,
+            values_callable=lambda enum_cls: [item.value for item in enum_cls],
+            validate_strings=True,
+        ),
+        nullable=False,
+    )
     user_id = Column(Integer,
         nullable=True,
         comment="Nullable to support guest users",)
