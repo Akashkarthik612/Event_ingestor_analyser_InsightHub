@@ -15,7 +15,7 @@ __all__ = [
     "OrderResponse",
     "OrderItemCreate",
     "OrderItemResponse",
-    "PaymentCreate",`r`n    "LogisticsCreate",
+    "PaymentCreate",  "LogisticsCreate",
     "LogisticsStatus",
 ]
 
