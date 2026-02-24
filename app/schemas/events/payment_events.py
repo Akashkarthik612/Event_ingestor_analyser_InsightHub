@@ -10,6 +10,5 @@ class PaymentCreate(BaseModel):
     
     status: str
     event_time: datetime
-    currency: str = Field("USD", max_length=3)
 
     model_config = ConfigDict(from_attributes=True)
