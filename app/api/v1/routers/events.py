@@ -4,8 +4,9 @@ API Router for Event Ingestion
 This router handles HTTP requests for various event types and routes them
 to the appropriate database tables.
 """
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 # Import Pydantic schemas
 from app.schemas.events.user_events import UserBehaviorCreate
@@ -65,7 +66,14 @@ def create_order_event(
     """Create a new order event."""
     db_event = OrderEvent(**payload.model_dump())
     db.add(db_event)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="order_id already exists",
+        )
     db.refresh(db_event)
     return db_event
 
